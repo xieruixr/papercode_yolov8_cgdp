@@ -1,34 +1,65 @@
-# YOLOv8-CGDP Paper Code
+# YOLOv8-CGDP Reproducibility
 
-This repository contains the code release for YOLOv8-CGDP, a YOLOv8-based object detection model.
+This repository contains the source code needed to reproduce the YOLOv8-CGDP model used in the paper.
 
-The target architecture is:
+## Model
+
+The YOLOv8-CGDP architecture is defined in:
 
 ```text
-config_model_yaml/yolov8_DCF-C2F_RGFM_SPECA_p234_dyhead.yaml
+config_model_yaml/yolov8_CG-C2F_DGAF_PCLA_p234_dyhead.yaml
 ```
 
-For complete installation and reproduction instructions, see [README_CGDP.md](README_CGDP.md).
+The model depends on these custom modules:
 
-## What Is Included
+- `C2f_ConvFormerCGLU` in `ultralytics/nn/modules/block.py`
+- `DGAF` in `ultralytics/nn/modules/block.py`
+- `PCLA` in `ultralytics/nn/modules/PCLA.py`
+- `Detect_DyHead` in `ultralytics/nn/modules/head.py`
+- YAML parser support in `ultralytics/nn/tasks.py`
 
-- YOLOv8-CGDP model YAML.
-- Modified Ultralytics source code needed by the model.
-- Dataset YAML examples for local dataset preparation.
-- Minimal training and validation entry points.
+## Installation
 
-## What Is Not Included
-
-Datasets, trained weights, local training runs, result folders, videos, and cache files are intentionally excluded.
-
-## Quick Start
+Create a Python environment with a PyTorch build that matches your CUDA version, then install the package:
 
 ```bash
+git clone https://github.com/xieruixr/papercode_yolov8_cgdp.git
+cd papercode_yolov8_cgdp
 pip install -e .
 pip install -r requirements-cgdp.txt
+```
+
+YOLOv8-CGDP uses MMCV deformable convolution operators. If your `mmcv` wheel does not include compiled ops for your PyTorch/CUDA version, install MMCV with OpenMIM:
+
+```bash
+pip install -U openmim
+mim install mmcv
+```
+
+## Dataset
+
+Datasets are not included. Prepare the dataset locally and update the `path` field in the dataset YAML.
+
+For VisDrone-style experiments, start from:
+
+```text
+dataset_yaml/VisDrone.yaml
+```
+
+## Training
+
+```bash
 python train_cgdp.py --data dataset_yaml/VisDrone.yaml --epochs 200 --imgsz 640 --batch 16
 ```
 
-## License
+The equivalent Ultralytics CLI command is:
 
-This codebase is derived from Ultralytics YOLOv8 and follows the AGPL-3.0 license included in this repository.
+```bash
+yolo detect train model=config_model_yaml/yolov8_DCF-C2F_DGAF_PCLA_p234_dyhead.yaml data=dataset_yaml/VisDrone.yaml epochs=200 imgsz=640 batch=16 optimizer=SGD
+```
+
+## Validation
+
+```bash
+python val_cgdp.py --weights runs/detect/train/weights/best.pt --data dataset_yaml/VisDrone.yaml --imgsz 640 --batch 8
+```

@@ -77,7 +77,7 @@ from ultralytics.nn.modules import (
     Detect_DyHead,
     CSP_MutilScaleEdgeInformationSelect,
     C2f_ConvFormerCGLU,
-    RGFM,
+    DGAF,
     C2f_Star,
     C2f_AINLite,
     C2f_AINLite_ECA,
@@ -118,7 +118,7 @@ from ultralytics.utils.torch_utils import (
 from ultralytics.nn.modules.attention import CBAMBlock,CoordAtt,DAttention
 from ultralytics.nn.modules.esc import ESCBlock, ConvAttn
 from ultralytics.nn.modules.GLSA import GLSA
-from ultralytics.nn.modules.SPECA import SPECA
+from ultralytics.nn.modules.PCLA import PCLA
 from ultralytics.nn.modules.starnet import *
 from ultralytics.nn.modules.labf_neck import *
 from ultralytics.nn.modules.rdaf import DyAlignUp, R2SF, FCRB, RDAFNode
@@ -1270,7 +1270,7 @@ def parse_model(d, ch, verbose=True):  # model_dict, input_channels(3)
         elif m in {CBAMBlock, CoordAtt, DAttention}:
             c2 = ch[f]  # input channels
             args = [c2, *args]  # pass input channels and remaining args
-        elif m in {SBA, SBA_DySample, RGFM}:
+        elif m in {SBA, SBA_DySample, DGAF}:
             c1 = [ch[x] for x in f]
             c2 = c1[-1]
             args = [c1, c2]
@@ -1315,7 +1315,7 @@ def parse_model(d, ch, verbose=True):  # model_dict, input_channels(3)
             c1 = ch[f]
             c2 = c1
             args = [c1, c2, *args[0:1]]
-        elif m is SPECA:
+        elif m is PCLA:
             c2 = ch[f]
             args = [c2,*args]
 

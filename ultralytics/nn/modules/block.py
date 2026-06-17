@@ -87,7 +87,7 @@ __all__ = (
     "C2f_ConvFormerCGLU",
     "C2f_CaFormerCGLU",
     "C2f_AP",
-    "RGFM",
+    "DGAF",
     "C2f_Star",
     "FocusFeature",
     "SGRNeck",
@@ -1115,7 +1115,7 @@ class SBA_DySample(nn.Module):
     
 ######################################## Re-CalibrationFPN_DySample end ########################################
 
-class RGFM(nn.Module):
+class DGAF(nn.Module):
     """Recursive gated feature fusion module used by YOLOv8-CGDP."""
 
     def __init__(self, inc, input_dim=64, dysample_groups=2):

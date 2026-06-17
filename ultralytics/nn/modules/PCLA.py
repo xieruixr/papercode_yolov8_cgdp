@@ -1,4 +1,4 @@
-"""SPECA block used by YOLOv8-CGDP."""
+"""PCLA block used by YOLOv8-CGDP."""
 
 import torch
 import torch.nn as nn
@@ -102,7 +102,7 @@ class ConvBranch(nn.Module):
         return identity + identity * self.sigmoid_spatial(refined)
 
 
-class SPECA(nn.Module):
+class PCLA(nn.Module):
     """Spatial Pyramid Enhanced Context Aggregation block."""
 
     def __init__(self, c_in, k_sizes=(3, 5, 7)):
@@ -117,7 +117,7 @@ class SPECA(nn.Module):
 
 if __name__ == "__main__":
     sample = torch.randn(4, 64, 20, 20)
-    block = SPECA(c_in=64, k_sizes=(3, 5, 7, 9))
+    block = PCLA(c_in=64, k_sizes=(3, 5, 7, 9))
     output = block(sample)
     assert output.shape == sample.shape
-    print("SPECA smoke test passed:", output.shape)
+    print("PCLA smoke test passed:", output.shape)
