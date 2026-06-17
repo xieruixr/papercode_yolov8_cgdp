@@ -1,0 +1,10 @@
+# Vehicle-oriented detection loss overrides.
+# Use with: yolo detect train cfg=ultralytics/cfg/vehicle_detect_loss.yaml ...
+
+vehicle_loss: True
+cls_loss: vfl
+box_nwd_weight: 0.30
+box_shape_weight: 0.10
+box: 7.5
+cls: 0.5
+dfl: 1.5

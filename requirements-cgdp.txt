@@ -1,0 +1,6 @@
+einops>=0.7.0
+timm>=0.9.0
+mmcv>=2.0.0
+mmengine>=0.10.0
+prettytable>=3.0.0
+pycocotools>=2.0.7
