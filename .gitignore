@@ -1,0 +1,52 @@
+# Python
+__pycache__/
+*.py[cod]
+*.pyd
+.pytest_cache/
+.mypy_cache/
+.ruff_cache/
+
+# Environments
+.env
+.venv/
+env/
+venv/
+
+# IDE
+.idea/
+.vscode/
+
+# Data and experiment artifacts
+/datasets/
+/runs/
+/weights/
+/result/
+/result1/
+/cgdp_tinyperson_result/
+/tinyperson_result_baseline/
+/test_data/
+/tmp/
+/figures/
+*.pt
+*.pth
+*.onnx
+*.engine
+*.torchscript
+*.tflite
+*.weights
+*.avi
+*.mp4
+*.mov
+*.mkv
+*.jpg
+*.jpeg
+*.png
+*.bmp
+*.tif
+*.tiff
+*.webp
+
+# Build outputs
+build/
+dist/
+*.egg-info/
