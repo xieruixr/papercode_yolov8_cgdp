@@ -56,7 +56,6 @@ from ultralytics.nn.modules import (
     Segment,
     WorldDetect,
     v10Detect,
-    CBAM,
     Detect_DyHead,
     C2f_ConvFormerCGLU,
     DGAF,

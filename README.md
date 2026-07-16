@@ -7,7 +7,7 @@ This repository contains the source code needed to reproduce the YOLOv8-CGDP mod
 The YOLOv8-CGDP architecture is defined in:
 
 ```text
-config_model_yaml/yolov8_CG-C2F__DGAF_PCLA_p234_dyhead.yaml
+config_model_yaml/yolov8_CG-C2F__DGAF_PCLA_p234_dyhead-detect.yaml
 ```
 
 The model depends on these custom modules:
@@ -16,7 +16,6 @@ The model depends on these custom modules:
 - `DGAF` in `ultralytics/nn/modules/block.py`
 - `PCLA` in `ultralytics/nn/modules/PCLA.py`
 - `Detect_DyHead` in `ultralytics/nn/modules/head.py`
-- YAML parser support in `ultralytics/nn/tasks.py`
 
 ## Installation
 
@@ -49,13 +48,13 @@ dataset_yaml/VisDrone.yaml
 ## Training
 
 ```bash
-python train_cgdp.py --data dataset_yaml/VisDrone.yaml --epochs 200 --imgsz 640 --batch 16
+python train_cgdp.py --data dataset_yaml/VisDrone.yaml --epochs 200 --imgsz 640 --batch 8
 ```
 
 The equivalent Ultralytics CLI command is:
 
 ```bash
-yolo detect train model=config_model_yaml/yolov8_CG-C2F__DGAF_PCLA_p234_dyhead.yaml data=dataset_yaml/VisDrone.yaml epochs=200 imgsz=640 batch=16 optimizer=SGD
+yolo detect train model=config_model_yaml/yolov8_CG-C2F__DGAF_PCLA_p234_dyhead-detect.yaml data=dataset_yaml/VisDrone.yaml epochs=200 imgsz=640 batch=8 optimizer=SGD
 ```
 
 ## Validation

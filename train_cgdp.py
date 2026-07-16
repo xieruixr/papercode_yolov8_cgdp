@@ -6,7 +6,7 @@ import warnings
 from ultralytics import YOLO
 
 
-DEFAULT_MODEL = "config_model_yaml/yolov8_CG-C2F__DGAF_PCLA_p234_dyhead.yaml"
+DEFAULT_MODEL = "config_model_yaml/yolov8_CG-C2F__DGAF_PCLA_p234_dyhead-detect.yaml"
 
 
 def parse_args():
